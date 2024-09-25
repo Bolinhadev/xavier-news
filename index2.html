@@ -8,6 +8,175 @@
     <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@300;400&display=swap');
 
+/* Animação do cabeçalho com gradiente rotativo */
+header::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, rgba(0, 150, 136, 0.1), transparent);
+  animation: rotateGradient 10s infinite linear;
+  z-index: -1;
+}
+
+@keyframes rotateGradient {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animação de aparecimento dos textos na hero */
+.hero h1 {
+  transform: translateY(100px);
+  opacity: 0;
+  animation: slideInUp 1.5s forwards;
+}
+
+.hero p {
+  opacity: 0;
+  animation: fadeIn 2.5s forwards;
+}
+
+@keyframes slideInUp {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Animação de hover nos links da navbar */
+nav a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #006600;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Animação de hover nas notícias */
+.news-item {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.news-item img {
+  transition: transform 0.5s ease;
+}
+
+.news-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.news-item:hover img {
+  transform: scale(1.1);
+}
+
+/* Animação de brilho ao hover nas notícias */
+.news-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
+  z-index: -1;
+  transition: left 0.4s ease;
+}
+
+.news-item:hover::after {
+  left: 100%;
+}
+
+/* Efeito de rotação no background gradiente do footer */
+footer::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  background-color: #006600;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  opacity: 0.7;
+  animation: rotateFooterCircle 6s infinite linear;
+}
+
+@keyframes rotateFooterCircle {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+/* Animação de rotação e expansão na barra de busca */
+#search-bar input:focus {
+  animation: pulseBorder 0.6s infinite alternate;
+}
+
+@keyframes pulseBorder {
+  from {
+    border-color: #ccc;
+    transform: scale(1);
+  }
+  to {
+    border-color: #006600;
+    transform: scale(1.02);
+  }
+}
+
+/* Animação de subida dos cards na entrada da página */
+.news-item {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: slideUp 0.8s forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
   * {
     margin: 0;
     padding: 0;
@@ -937,7 +1106,13 @@ Além disso, o impacto do caso Maria da Penha foi tão grande que motivou a cria
       document.getElementById("news-container").style.display = 'grid';
     }
 
-    document.addEventListener('DOMContentLoaded', loadNews); // Carrega as notícias ao carregar a página
+    document.addEventListener('DOMContentLoaded', loadNews);
+    
+   window.addEventListener('scroll', () => {
+     const navbar = document.querySelector('nav');
+     navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    // Carrega as notícias ao carregar a página
   </script>
 
 </body>
