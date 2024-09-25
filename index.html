@@ -258,6 +258,59 @@
   </footer>
 
   <script>
+    window.onload = function() {
+    // Cria o container do popup
+    var popup = document.createElement("div");
+    popup.style.position = "fixed";
+    popup.style.top = "0";
+    popup.style.left = "0";
+    popup.style.width = "100%";
+    popup.style.height = "100%";
+    popup.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+    popup.style.display = "flex";
+    popup.style.justifyContent = "center";
+    popup.style.alignItems = "center";
+    popup.style.zIndex = "1000";
+
+    // Cria a caixa interna do popup
+    var popupBox = document.createElement("div");
+    popupBox.style.backgroundColor = "#FF0000";
+    popupBox.style.padding = "20px";
+    popupBox.style.borderRadius = "10px";
+    popupBox.style.textAlign = "center";
+    popupBox.style.color = "#FFFFFF";
+    popupBox.style.fontSize = "18px";
+    popupBox.style.maxWidth = "600px";
+    popupBox.style.width = "90%";
+
+    // Texto do aviso
+    var textoAviso = document.createElement("p");
+    textoAviso.textContent = "Este é um site com finalidade estritamente educacional, destinado a ilustrar conteúdos relativos ao caso Maria da Penha, conforme abordado na disciplina de Língua Portuguesa. Por favor, tenha ciência de que este conteúdo é meramente didático.";
+
+    // Botão de fechar
+    var botaoFechar = document.createElement("button");
+    botaoFechar.textContent = "Fechar";
+    botaoFechar.style.backgroundColor = "#FFFFFF";
+    botaoFechar.style.color = "#FF0000";
+    botaoFechar.style.border = "none";
+    botaoFechar.style.padding = "10px 20px";
+    botaoFechar.style.borderRadius = "5px";
+    botaoFechar.style.cursor = "pointer";
+    botaoFechar.style.marginTop = "20px";
+
+    // Função de fechar o popup
+    botaoFechar.onclick = function() {
+        document.body.removeChild(popup);
+    };
+
+    // Adiciona o conteúdo à caixa e a caixa ao popup
+    popupBox.appendChild(textoAviso);
+    popupBox.appendChild(botaoFechar);
+    popup.appendChild(popupBox);
+
+    // Adiciona o popup ao corpo da página
+    document.body.appendChild(popup);
+};
     const initialNews = [
       {
         id: 1,
